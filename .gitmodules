@@ -1,0 +1,3 @@
+[submodule "Plugins/AsobiSDK"]
+	path = Plugins/AsobiSDK
+	url = https://github.com/widgrensit/asobi-unreal.git

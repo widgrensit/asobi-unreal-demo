@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "5.4",
+	"Category": "",
+	"Description": "Asobi Unreal SDK demo — top-down multiplayer arena",
+	"Modules": [
+		{
+			"Name": "AsobiUnrealDemo",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"CoreUObject",
+				"UMG"
+			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "AsobiSDK",
+			"Enabled": true
+		}
+	]
+}
