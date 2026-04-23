@@ -6,7 +6,7 @@ A player auto-registers, joins the `arena` matchmaker, drops into a match, and m
 
 ## Prerequisites
 
-- Unreal Engine 5.4+
+- Unreal Engine 5.7+
 - Asobi backend running locally (see [widgrensit/asobi](https://github.com/widgrensit/asobi))
 - Arena game mode configured on the backend (`arena` → `asobi_arena`)
 
