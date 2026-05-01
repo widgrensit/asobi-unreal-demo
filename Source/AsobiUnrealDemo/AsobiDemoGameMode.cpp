@@ -1,5 +1,6 @@
 #include "AsobiDemoGameMode.h"
 #include "AsobiDemoGameInstance.h"
+#include "AsobiDemoHUD.h"
 #include "AsobiDemoPawn.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
@@ -9,6 +10,7 @@
 AAsobiDemoGameMode::AAsobiDemoGameMode()
 {
 	DefaultPawnClass = AAsobiDemoPawn::StaticClass();
+	HUDClass = AAsobiDemoHUD::StaticClass();
 }
 
 void AAsobiDemoGameMode::StartPlay()

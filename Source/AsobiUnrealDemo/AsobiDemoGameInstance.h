@@ -43,13 +43,13 @@ public:
 	FOnAsobiDemoStatusChanged OnStatusChanged;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Asobi Demo")
-	FString HttpBaseUrl = TEXT("http://localhost:8080");
+	FString HttpBaseUrl = TEXT("http://localhost:8084");
 
 	UPROPERTY(EditDefaultsOnly, Category = "Asobi Demo")
-	FString WebSocketUrl = TEXT("ws://localhost:8080/ws");
+	FString WebSocketUrl = TEXT("ws://localhost:8084/ws");
 
 	UPROPERTY(EditDefaultsOnly, Category = "Asobi Demo")
-	FString MatchMode = TEXT("arena");
+	FString MatchMode = TEXT("demo");
 
 	UPROPERTY(BlueprintReadOnly, Category = "Asobi Demo")
 	UAsobiClient* Client;
@@ -74,6 +74,9 @@ private:
 
 	UFUNCTION()
 	void HandleMatchJoined(const FString& InfoJson);
+
+	UFUNCTION()
+	void HandleMatchMatched(const FString& InfoJson);
 
 	UFUNCTION()
 	void HandleMatchLeft();
