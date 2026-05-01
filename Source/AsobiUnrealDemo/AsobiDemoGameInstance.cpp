@@ -18,6 +18,10 @@ void UAsobiDemoGameInstance::Init()
 	WebSocket = NewObject<UAsobiWebSocket>(this);
 	WebSocket->OnConnected.AddDynamic(this, &UAsobiDemoGameInstance::HandleWsConnected);
 	WebSocket->OnDisconnected.AddDynamic(this, &UAsobiDemoGameInstance::HandleWsDisconnected);
+	// match.matched arrives via the matchmaker push; match.joined arrives as
+	// the reply to a client-initiated match.join. Both signal the demo
+	// should flip into InMatch.
+	WebSocket->OnMatchMatched.AddDynamic(this, &UAsobiDemoGameInstance::HandleMatchMatched);
 	WebSocket->OnMatchJoined.AddDynamic(this, &UAsobiDemoGameInstance::HandleMatchJoined);
 	WebSocket->OnMatchLeft.AddDynamic(this, &UAsobiDemoGameInstance::HandleMatchLeft);
 }
@@ -110,10 +114,16 @@ void UAsobiDemoGameInstance::HandleMatchmakerResult(bool bSuccess, const FAsobiM
 	}
 }
 
+void UAsobiDemoGameInstance::HandleMatchMatched(const FString& InfoJson)
+{
+	SetStatus(EAsobiDemoStatus::InMatch);
+	UE_LOG(LogTemp, Log, TEXT("Matchmaker matched"));
+}
+
 void UAsobiDemoGameInstance::HandleMatchJoined(const FString& InfoJson)
 {
 	SetStatus(EAsobiDemoStatus::InMatch);
-	UE_LOG(LogTemp, Log, TEXT("Joined match: %s"), *InfoJson);
+	UE_LOG(LogTemp, Log, TEXT("Joined match"));
 }
 
 void UAsobiDemoGameInstance::HandleMatchLeft()

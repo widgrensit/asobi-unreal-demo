@@ -1,7 +1,9 @@
 #include "AsobiDemoPawn.h"
 #include "AsobiDemoGameInstance.h"
+#include "Camera/CameraComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/InputComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "UObject/ConstructorHelpers.h"
 
 AAsobiDemoPawn::AAsobiDemoPawn()
@@ -17,6 +19,18 @@ AAsobiDemoPawn::AAsobiDemoPawn()
 		MeshComponent->SetStaticMesh(Cube.Object);
 	}
 	MeshComponent->SetWorldScale3D(FVector(0.5f));
+
+	// Top-down spring-arm + camera so pressing Play actually shows the pawn.
+	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+	SpringArm->SetupAttachment(RootComponent);
+	SpringArm->TargetArmLength = 1200.0f;
+	SpringArm->SetRelativeRotation(FRotator(-70.0f, 0.0f, 0.0f));
+	SpringArm->bDoCollisionTest = false;
+	SpringArm->bUsePawnControlRotation = false;
+
+	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
+	Camera->bUsePawnControlRotation = false;
 }
 
 void AAsobiDemoPawn::Tick(float DeltaSeconds)
